@@ -6,28 +6,23 @@ use App\Http\Requests\InsertRequest;
 use App\Tour;
 use Illuminate\Http\Request;
 
+use function GuzzleHttp\json_encode;
+
 class AdminController extends Controller
 {
-    //
-    function index($page=0){
-        $tours=Tour::all();
+    function index(Request $req){
+        $page= 5*((int) $req->page);
+         $tours=Tour::all();
         $quantity=count($tours);
         $result=[];
-        for($i=$page*5;$i<$page+5;$i++){
-            array_push($result,$tours[$i]);
+        for($i=$page;$i>$page-5;$i--){
+            if(isset($tours[$i])){
+                array_push($result,$tours[$i]);
+            }
         }
         return view('admin',['tours'=>$result,'quantity'=>$quantity]);
     }
-    function page(Request $req){
-        $page=$req->page;
-        $tours=Tour::all();
-        $quantity=count($tours);
-        $result=[];
-        for($i=$page*5;$i<$page+5;$i++){
-            array_push($result,$tours[$i]);
-        }
-        return view('admin',['tours'=>$result,'quantity'=>$quantity]);
-    }
+
     function insert(InsertRequest $req){
        $tour = new Tour();
        $tour->name=$req->input('name');

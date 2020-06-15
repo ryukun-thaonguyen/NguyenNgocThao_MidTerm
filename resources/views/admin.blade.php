@@ -112,6 +112,7 @@
                  <!--else of check option-->
             <div class="card">
               <div class="card-header">
+                  Show 5 in {{ $quantity }}
                 <button type="button" style="float:right" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal">
                         <i class="fas fa-plus-circle"></i>
                         add product
@@ -142,7 +143,7 @@
                          <td>{{ $p->schedule }}</td>
                          <td>{{ $p->depart }}</td>
                          <td>{{ $p->numberPeople }}</td>
-                         <td>{{ $p->price }}</td>
+                         <td>{{ $p->getPrice() }}</td>
                         </tr>
                       @endforeach
                   </tbody>
@@ -160,8 +161,8 @@
                   </tfoot>
                 </table>
               </div>
-              <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+              <div class="col-sm-12 col-md-7" >
+                  <div class="dataTables_paginate paging_simple_numbers"  style="float: right" id="example1_paginate">
                       <ul class="pagination">
                           <li class="paginate_button page-item previous" id="example1_previous">
                               <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
@@ -175,7 +176,7 @@
                           @endfor
                         <li class="paginate_button page-item next" id="example1_next">
                             <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div>
-                        </div>
+                </div>
             </div>
           </div>
         </div>
